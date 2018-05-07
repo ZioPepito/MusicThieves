@@ -12,6 +12,14 @@ public class MusicEngineWrapper {
 		String title = doc.title();
 		
 		System.out.println(title);
+		
+		int lyricsUid = 6291;
+		String lyricsToken = "Df5Z10GPxLyV7FfA";
+		doc = Jsoup.connect("http://www.stands4.com/services/v2/lyrics.php?uid="+lyricsUid+
+				"&tokenid="+lyricsToken+"&term=forever%20young").get();
+		String text = doc.toString();
+		
+		System.out.println(text);
 	}
 
 	public MusicEngineWrapper() {
