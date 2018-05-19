@@ -29,5 +29,13 @@ public class LyricsWrapper {
 		
 		return firstResult;
 	}
+	
+	public String getLyric(String lyricLink) throws IOException {
+		
+		Document doc = Jsoup.connect(lyricLink).get();
+		String lyric = doc.getElementById("lyric-body-text").text();
+		
+		return lyric;
+	}
 
 }
