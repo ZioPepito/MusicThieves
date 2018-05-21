@@ -2,8 +2,6 @@ package musicthieves.wrapper;
 
 import java.io.IOException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 public class WrapperTester {
@@ -28,7 +26,15 @@ public static void main(String[] args) throws IOException {
 		System.out.println(title+"\n"+artist+"\n"+album+"\n"+albumYear+"\n");
 		System.out.println(lyricLink+"\n");
 		System.out.println(lyric+"\n");
-	/* End Test LyricsWrapper */	
+	/* End Test LyricsWrapper */
+		
+	/* Begin Test LastFMWrapper */
+		String[] terms1 = {"follie","preferenziali"};
+		LastFMWrapper LFMWrapper = new LastFMWrapper();
+		String[] songInfo = LFMWrapper.getSong(terms1);
+		
+		System.out.println(songInfo[0]+"\n"+songInfo[1]+"\n");
+	/* End Test LastFMWrapper */
 	}
 
 }
