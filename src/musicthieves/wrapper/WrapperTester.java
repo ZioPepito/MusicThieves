@@ -9,7 +9,7 @@ public class WrapperTester {
 public static void main(String[] args) throws IOException {
 		
 	/* Begin Test LyricsWrapper */
-		String[] terms = {"partono","plotoni","di","uomini"};
+		String terms = "partono plotoni di uomini";
 		LyricsWrapper lWrapper = new LyricsWrapper();
 		Element firstResult = lWrapper.search(terms);
 		
@@ -29,7 +29,7 @@ public static void main(String[] args) throws IOException {
 	/* End Test LyricsWrapper */
 		
 	/* Begin Test LastFMWrapper */
-		String[] terms1 = {"follie","preferenziali"};
+		String terms1 = "follie preferenziali";
 		LastFMWrapper LFMWrapper = new LastFMWrapper();
 		String[] songInfo = LFMWrapper.getSong(terms1);
 		
