@@ -24,7 +24,7 @@ public static void main(String[] args) throws IOException {
 		String lyric = lWrapper.getLyric(lyricLink);
 		
 		System.out.println(title+"\n"+artist+"\n"+album+"\n"+albumYear+"\n");
-		System.out.println(lyricLink+"\n");
+		
 		System.out.println(lyric+"\n");
 	/* End Test LyricsWrapper */
 		
