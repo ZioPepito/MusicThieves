@@ -35,6 +35,17 @@ public static void main(String[] args) throws IOException {
 		
 		System.out.println(songInfo[0]+"\n"+songInfo[1]+"\n");
 	/* End Test LastFMWrapper */
+		
+	/* Begin Test LastFMWrapper */
+		String terms2 = "Dream Theater";
+		MusicMapWrapper mapWrapper = new MusicMapWrapper();
+		String[] relatedArtist = mapWrapper.relatedArtists(terms2);
+		
+		for(int i = 0; i < 5; i++) {
+			System.out.println(relatedArtist[i]);
+		}
+	
+	/* End Test LastFMWrapper */
 	}
 
 }
