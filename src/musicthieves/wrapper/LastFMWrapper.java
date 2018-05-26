@@ -13,10 +13,10 @@ public class LastFMWrapper {
 		
 	}
 	
-	public String[] getSong(String terms) throws IOException {
+	public String[] getSong(String input) throws IOException {
 		
 		Document doc = Jsoup.connect("https://ws.audioscrobbler.com/2.0/?method=track.search&track="+
-		URLEncoder.encode(terms, "UTF-8")+"&api_key="	+ API_KEY).get();
+		URLEncoder.encode(input, "UTF-8")+"&api_key="	+ API_KEY).get();
 		
 		String title = doc.getElementsByTag("track").first().getElementsByTag("name").first().text();
 		String artist = doc.getElementsByTag("track").first().getElementsByTag("artist").first().text();

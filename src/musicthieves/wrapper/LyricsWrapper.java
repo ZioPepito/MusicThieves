@@ -13,9 +13,9 @@ public class LyricsWrapper {
 		
 	}
 	
-	public String[] search(String terms) throws IOException {
+	public String[] search(String input) throws IOException {
 		
-		Document doc = Jsoup.connect("https://www.lyrics.com/lyrics/"+URLEncoder.encode(terms, "UTF-8")).get();
+		Document doc = Jsoup.connect("https://www.lyrics.com/lyrics/"+URLEncoder.encode(input, "UTF-8")).get();
 		Element firstResult = doc.getElementsByClass("sec-lyric clearfix").first();
 		
 		String[] results = new String[5];
@@ -37,4 +37,8 @@ public class LyricsWrapper {
 		return lyric;
 	}
 
+	public String searchAlbum(String input) {
+		
+		return "";
+	}
 }
