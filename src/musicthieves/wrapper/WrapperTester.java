@@ -2,13 +2,12 @@ package musicthieves.wrapper;
 
 import java.io.IOException;
 
-import org.jsoup.nodes.Element;
-
 public class WrapperTester {
 
 public static void main(String[] args) throws IOException {
 		
 	/* Begin Test LyricsWrapper */
+		//search in lyric
 		String input = "partono plotoni di uomini";
 		LyricsWrapper lWrapper = new LyricsWrapper();
 		String[] data = lWrapper.search(input);
@@ -20,6 +19,10 @@ public static void main(String[] args) throws IOException {
 		String lyric = lWrapper.getLyric(data[4]);		
 		
 		System.out.println(lyric+"\n");
+		
+		//search album
+		String artist = lWrapper.searchAlbum("Master of puppets");
+		System.out.println("L'artista dell'album cercato è: "+artist+"\n");
 	/* End Test LyricsWrapper */
 		
 	/* Begin Test LastFMWrapper */

@@ -37,8 +37,15 @@ public class LyricsWrapper {
 		return lyric;
 	}
 
-	public String searchAlbum(String input) {
+	public String searchAlbum(String input) throws IOException {
 		
-		return "";
+		Document doc = Jsoup.connect("https://www.lyrics.com/serp.php?st="+
+				URLEncoder.encode(input, "UTF-8")+"&qtype=3").get();
+		Element firstResult = doc.getElementsByClass("tal qx").first().getElementsByTag("a").first();
+		
+		Document doc1 = Jsoup.connect("https://www.lyrics.com"+firstResult.attr("href").toString()).get();
+		String artist = doc1.getElementsByClass("hg1p23").first().getElementsByTag("h2").first().text();
+		
+		return artist;
 	}
 }
