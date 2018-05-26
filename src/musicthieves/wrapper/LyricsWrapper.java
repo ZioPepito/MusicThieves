@@ -13,12 +13,20 @@ public class LyricsWrapper {
 		
 	}
 	
-	public Element search(String terms) throws IOException {
+	public String[] search(String terms) throws IOException {
 		
 		Document doc = Jsoup.connect("https://www.lyrics.com/lyrics/"+URLEncoder.encode(terms, "UTF-8")).get();
 		Element firstResult = doc.getElementsByClass("sec-lyric clearfix").first();
 		
-		return firstResult;
+		String[] results = new String[5];
+		results[0] = firstResult.getElementsByClass("lyric-meta-title").first().text();
+		results[1] = firstResult.getElementsByClass("lyric-meta-artists").first().text();
+		results[2] = firstResult.getElementsByClass("lyric-meta-album").first().text();
+		results[3] = firstResult.getElementsByClass("lyric-meta-album-year").first().text();
+		results[4] = "https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
+				getElementsByTag("a").first().attr("href").toString();
+		
+		return results;
 	}
 	
 	public String getLyric(String lyricLink) throws IOException {

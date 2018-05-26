@@ -11,19 +11,13 @@ public static void main(String[] args) throws IOException {
 	/* Begin Test LyricsWrapper */
 		String terms = "partono plotoni di uomini";
 		LyricsWrapper lWrapper = new LyricsWrapper();
-		Element firstResult = lWrapper.search(terms);
+		String[] data = lWrapper.search(terms);
 		
-		String title = firstResult.getElementsByClass("lyric-meta-title").first().text();
-		String artist = firstResult.getElementsByClass("lyric-meta-artists").first().text();
-		String album = firstResult.getElementsByClass("lyric-meta-album").first().text();
-		int albumYear = Integer.parseInt(firstResult.getElementsByClass("lyric-meta-album-year").first().text());
+		for(int i = 0; i < 4; i++) {
+			System.out.println(data[i]+"");
+		}
 		
-		String lyricLink = "https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
-				getElementsByTag("a").first().attr("href").toString();	
-		
-		String lyric = lWrapper.getLyric(lyricLink);
-		
-		System.out.println(title+"\n"+artist+"\n"+album+"\n"+albumYear+"\n");
+		String lyric = lWrapper.getLyric(data[4]);		
 		
 		System.out.println(lyric+"\n");
 	/* End Test LyricsWrapper */
@@ -41,6 +35,7 @@ public static void main(String[] args) throws IOException {
 		MusicMapWrapper mapWrapper = new MusicMapWrapper();
 		String[] relatedArtist = mapWrapper.relatedArtists(terms2);
 		
+		System.out.println("Hai cercato "+terms2+". Potrebbero piacerti:");
 		for(int i = 0; i < 5; i++) {
 			System.out.println(relatedArtist[i]);
 		}
