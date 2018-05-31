@@ -3,8 +3,6 @@ package musicthieves.wrapper;
 import java.io.*;
 import java.net.*;
 
-import org.apache.http.auth.AUTH;
-
 import com.wrapper.spotify.*;
 import com.wrapper.spotify.exceptions.*;
 import com.wrapper.spotify.model_objects.credentials.*;
