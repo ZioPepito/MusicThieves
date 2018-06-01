@@ -7,6 +7,12 @@ body, html {
 
 body{
 	padding:2%;
+	background: radial-gradient(black, #bebebe);
+		
+}
+
+#bg{
+	height:100%;
 	background-image: url("logo.png");
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -24,4 +30,12 @@ body{
 .btn{
 	height:100%;
 	width:100%;
+}
+
+#submit{
+	background-color: #000000;
+	border-color: #e69900;
+	font-size: 120%;
+	color: #e69900;
+	font-weight:bold;
 }
