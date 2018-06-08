@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wrapper.spotify.enums.ModelObjectType;
+
 import musicthieves.wrapper.SpotifyWrapper;
 
 /**
@@ -28,6 +30,9 @@ public class Spotify extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SpotifyWrapper wrapper=new SpotifyWrapper();
+		//wrapper.clientCredentials_Sync();
+		response.sendRedirect(wrapper.searchItem_Sync("unforgiven", ModelObjectType.TRACK.getType()));
 	}
 
 	/**

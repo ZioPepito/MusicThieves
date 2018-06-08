@@ -5,6 +5,7 @@ import java.net.*;
 
 import com.neovisionaries.i18n.CountryCode;
 import com.sun.marlin.DTransformingPathConsumer2D;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wrapper.spotify.*;
 import com.wrapper.spotify.enums.ModelObjectType;
 import com.wrapper.spotify.exceptions.*;
@@ -43,16 +44,8 @@ public class SpotifyWrapper {
 	
 	public static void main(String args[]) {
 		clientCredentials_Sync();
-		/*try {
-			System.out.println(spotifyApi.searchTracks("unforgiven").build().execute().getTotal());
-		} catch (SpotifyWebApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		searchItem_Sync("unforgiven", ModelObjectType.TRACK.getType());
+		getTrack_Sync();
 	}
 	
 	
@@ -124,22 +117,8 @@ public class SpotifyWrapper {
 	      System.out.println("Error: " + e.getMessage());
 	    }
 	  }
-	
-
-	  public static void searchTracks_Sync() {
-	    try {
-	      Paging<Track> trackPaging = spotifyApi.searchTracks("unforgiven")
-	          .limit(10)
-	          .offset(0)
-	          .build()
-	          .execute();
-	      System.out.println("Total: " + trackPaging.getNext());
-	    } catch (IOException | SpotifyWebApiException e) {
-	      System.out.println("Error: " + e.getMessage());
-	    }
-	  }
 	  
-	  public static void searchItem_Sync(String q, String type) {
+	  public static String searchItem_Sync(String q, String type) {
 		    try {
 		      final SearchResult searchResult = spotifyApi.searchItem(q, type)
 		              .market(CountryCode.IT)
@@ -148,10 +127,12 @@ public class SpotifyWrapper {
 		              .build()
 		              .execute();
 
-		      System.out.println("Total tracks: " + searchResult.getTracks().getNext());
+		      System.out.println(searchResult.getTracks().getNext());
+		      return searchResult.getTracks().getNext();
 		    } catch (IOException | SpotifyWebApiException e) {
 		      System.out.println("Error: " + e.getMessage());
 		    }
+		    return null;
 		  }
 
 }
