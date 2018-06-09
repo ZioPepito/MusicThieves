@@ -4,18 +4,14 @@ import java.io.*;
 import java.net.*;
 
 import com.neovisionaries.i18n.CountryCode;
-import com.sun.marlin.DTransformingPathConsumer2D;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.wrapper.spotify.*;
 import com.wrapper.spotify.enums.ModelObjectType;
 import com.wrapper.spotify.exceptions.*;
 import com.wrapper.spotify.model_objects.credentials.*;
 import com.wrapper.spotify.model_objects.special.SearchResult;
-import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.authorization.authorization_code.*;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
-import com.wrapper.spotify.requests.data.search.simplified.SearchTracksRequest;
 import com.wrapper.spotify.requests.data.tracks.GetTrackRequest;
 
 public class SpotifyWrapper {
@@ -37,17 +33,7 @@ public class SpotifyWrapper {
 	public static final URI uri = authorizationCodeUriRequest.execute();
 	private static final GetTrackRequest getTrackRequest = spotifyApi.getTrack("0BAjUM6V9P9g8rK83hVUTJ")
 	          .build();
-	/*private static final AuthorizationCodeRequest authorizationCodeRequest = spotifyApi.authorizationCode(uri.toString())
-	          .build();*/
 
-	
-	
-	public static void main(String args[]) {
-		clientCredentials_Sync();
-		searchItem_Sync("unforgiven", ModelObjectType.TRACK.getType());
-		getTrack_Sync();
-	}
-	
 	
 	
 	public void authorizationCode_Sync(String code) {
@@ -109,7 +95,7 @@ public class SpotifyWrapper {
 	
 	
 	
-	public static void getTrack_Sync() {
+	public void getTrack_Sync() {
 	    try {
 	      final Track track = getTrackRequest.execute();
 	      System.out.println("Name: " + track.getName());
@@ -118,7 +104,7 @@ public class SpotifyWrapper {
 	    }
 	  }
 	  
-	  public static String searchItem_Sync(String q, String type) {
+	  public String searchItem_Sync(String q, String type) {
 		    try {
 		      final SearchResult searchResult = spotifyApi.searchItem(q, type)
 		              .market(CountryCode.IT)

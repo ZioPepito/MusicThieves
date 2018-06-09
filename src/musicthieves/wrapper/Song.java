@@ -2,13 +2,13 @@ package musicthieves.wrapper;
 
 public class Song {
 	
-	private String title, author, linkToText;
+	private String title, artist, text;
 
-	public Song(String title, String author, String linkToText) {
+	public Song(String title, String author, String text) {
 		super();
 		this.title = title;
-		this.author = author;
-		this.linkToText = linkToText;
+		this.artist = author;
+		this.text = text;
 	}
 
 	public String getTitle() {
@@ -20,19 +20,19 @@ public class Song {
 	}
 
 	public String getAuthor() {
-		return author;
+		return artist;
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.artist = author;
 	}
 
-	public String getLinkToText() {
-		return linkToText;
+	public String getText() {
+		return text;
 	}
 
 	public void setLinkToText(String linkToText) {
-		this.linkToText = linkToText;
+		this.text = linkToText;
 	};
 	
 	

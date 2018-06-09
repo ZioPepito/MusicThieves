@@ -22,9 +22,9 @@ public class AZlyricsWrapper {
 	
 	public static void main(String[] args) {
 		AZlyricsWrapper az=new AZlyricsWrapper();
-		List<Song> res=az.searchByKey("unforgiven");
+		List<Song> res=az.searchByKey("partono plotoni di uomini");
 		for (Song song : res) {
-			System.out.println(song.getTitle());
+			System.out.println(song.getText());
 		}
 	}
 
@@ -38,7 +38,8 @@ public class AZlyricsWrapper {
 			for (Element element : songs) {
 				if(counter>=MAX_RESULTS)
 					break; 
-				results.add(new Song(element.getElementsByTag("a").first().child(0).html(), element.getElementsByTag("b").first().html(), element.getElementsByTag("a").first().attr("href")));
+				String text=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get().getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
+				results.add(new Song(element.getElementsByTag("a").first().child(0).html(), element.getElementsByTag("b").first().html(), text));
 				counter++;
 			}
 
