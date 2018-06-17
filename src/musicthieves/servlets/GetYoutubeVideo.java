@@ -36,7 +36,7 @@ public class GetYoutubeVideo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		YoutubeWrapper yw = new YoutubeWrapper();
 		String keyword=request.getParameter("key");
-		SearchResult res =yw.SearchSong(keyword);
+		SearchResult res =yw.searchSong(keyword);
 		request.setAttribute("videoID", res.getId().getVideoId());
 		request.setAttribute("SongTitle", res.getSnippet().getTitle());
 		String nextJSP = "/youtubevideo.jsp";

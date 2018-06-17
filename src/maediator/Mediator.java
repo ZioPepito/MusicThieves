@@ -2,6 +2,8 @@ package maediator;
 
 import java.util.List;
 
+import com.google.api.services.youtube.model.SearchResult;
+
 import musicthieves.wrapper.*;
 
 public class Mediator {
@@ -19,6 +21,11 @@ public class Mediator {
 		//other sources		
 		
 		return null;
+	}
+	
+	public String findOnYoutube(String keyword) {
+		SearchResult result=you.searchSong(keyword);
+		return result.getId().getVideoId();
 	}
 
 }

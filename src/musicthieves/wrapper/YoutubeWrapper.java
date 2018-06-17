@@ -19,7 +19,7 @@ public class YoutubeWrapper {
      */
     private static final String PROPERTIES_FILENAME = "YoutubeKey";
 
-    private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
+    private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
 
     /**
      * Define a global instance of a Youtube object, which will be used
@@ -27,7 +27,7 @@ public class YoutubeWrapper {
      */
     private static YouTube youtube;
     
-    public SearchResult SearchSong(String keyword) {
+    public SearchResult searchSong(String keyword) {
     	Properties properties = new Properties();
         try {
             InputStream in = Search.class.getResourceAsStream("/" + PROPERTIES_FILENAME);
