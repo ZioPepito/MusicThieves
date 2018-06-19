@@ -16,14 +16,14 @@ public class Mediator {
 	//private static SpotifyWrapper sp=new SpotifyWrapper();
 	
 	
-	public Song searchByKey(String key) {
+	public static Song searchByKey(String key) {
 		List<Song> azResults=az.searchByKey(key);
 		//other sources		
 		
 		return null;
 	}
 	
-	public String findOnYoutube(String keyword) {
+	public static String findOnYoutube(String keyword) {
 		SearchResult result=you.searchSong(keyword);
 		return result.getId().getVideoId();
 	}
