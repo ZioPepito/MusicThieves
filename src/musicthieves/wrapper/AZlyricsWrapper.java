@@ -22,7 +22,7 @@ public class AZlyricsWrapper {
 	
 	public static void main(String[] args) {
 		AZlyricsWrapper az=new AZlyricsWrapper();
-		List<Song> res=az.searchByKey("partono plotoni di uomini");
+		List<Song> res=az.searchByKey("");
 		for (Song song : res) {
 			System.out.println(song.getText());
 		}
@@ -43,7 +43,10 @@ public class AZlyricsWrapper {
 				counter++;
 			}
 
-		} catch (UnsupportedEncodingException e) {
+		} catch(NullPointerException e) {
+			return null;
+		}		
+		catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
