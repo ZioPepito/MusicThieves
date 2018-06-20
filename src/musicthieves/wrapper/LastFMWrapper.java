@@ -1,7 +1,10 @@
 package musicthieves.wrapper;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,13 +16,24 @@ public class LastFMWrapper {
 
 	}
 
-	public String[] getSong(String input) throws IOException {
-		String[] results = new String[5];
+	public List<Song>getSong(String input) {
+		List<Song> results=new ArrayList<Song>();
 
-		Document doc = Jsoup.connect("https://ws.audioscrobbler.com/2.0/?method=track.search&track="+
-				URLEncoder.encode(input, "UTF-8")+"&api_key="	+ API_KEY).get();
-		for(int i = 0; i < 5; i++) {
-			results[i] = doc.getElementsByTag("track").get(i).getElementsByTag("name").first().text() +", "+ doc.getElementsByTag("track").get(i).getElementsByTag("artist").first().text();
+		Document doc;
+		try {
+			doc = Jsoup.connect("https://ws.audioscrobbler.com/2.0/?method=track.search&track="+
+					URLEncoder.encode(input, "UTF-8")+"&api_key="	+ API_KEY).get();
+			for(int i = 0; i < 1; i++) {
+				results.add(new Song(doc.getElementsByTag("track").get(i).getElementsByTag("name").first().text() , doc.getElementsByTag("track").get(i).getElementsByTag("artist").first().text(),null));
+			}
+		} catch(NullPointerException e) {
+			return null;
+		}
+		catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			return null;
 		}
 		return results;
 	}

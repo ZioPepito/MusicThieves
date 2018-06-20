@@ -1,4 +1,4 @@
-package maediator;
+package mediator;
 
 import java.util.List;
 
@@ -17,9 +17,25 @@ public class Mediator {
 	
 	
 	public static Song searchByKey(String key) {
-		List<Song> azResults=az.searchByKey(key);
-		//other sources		
+		//AZLyrics
+		List<Song> results=az.searchByKey(key);
+		if(results!=null)
+			return results.get(0);
+
+		//lyrics
+		String[] lyricsResults=ly.search(key);
+		if(lyricsResults!=null) {
+			Song song=new Song(lyricsResults[0], lyricsResults[1], lyricsResults[4]);
+			song.setAlbum(lyricsResults[2]);
+			song.setAlbumYear(lyricsResults[3]);
+			return song;
+		}
 		
+		results=lfm.getSong(key);
+		if(results!=null) {
+			return results.get(0);
+		}
+			
 		return null;
 	}
 	

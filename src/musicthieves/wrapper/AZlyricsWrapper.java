@@ -16,7 +16,7 @@ import org.jsoup.select.Elements;
 
 public class AZlyricsWrapper {
 
-	public static final int MAX_RESULTS = 5;
+	public static final int MAX_RESULTS = 1;
 
 	private static String url = "https://search.azlyrics.com/search.php?q=";
 	
@@ -50,8 +50,7 @@ public class AZlyricsWrapper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		return results;
 	}

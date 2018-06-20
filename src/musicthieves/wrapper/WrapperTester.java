@@ -9,7 +9,7 @@ public class WrapperTester {
 		/* Begin Test LyricsWrapper */
 		System.out.println("TEST LYRICS\n");
 		//search in lyric
-		String input = "partono plotoni di uomini";
+		String input = "aDSASDASDSAF";
 		LyricsWrapper lWrapper = new LyricsWrapper();
 		String[] data = lWrapper.search(input);
 
@@ -23,18 +23,18 @@ public class WrapperTester {
 
 		//search album
 		String artist = lWrapper.searchAlbum("Master of puppets");
-		System.out.println("L'artista dell'album cercato è: "+artist+"\n");
+		System.out.println("L'artista dell'album cercato ï¿½: "+artist+"\n");
 		/* End Test LyricsWrapper */
 
 		System.out.println("TEST LASTFM\n");
 		/* Begin Test LastFMWrapper */
 		String input1 = "follie";
 		LastFMWrapper LFMWrapper = new LastFMWrapper();
-		String[] songInfo = LFMWrapper.getSong(input1);
+		/*String[] songInfo = LFMWrapper.getSong(input1);
 		System.out.println("Risultati per '"+input1+"': ");
 		for(int i = 0; i < 5; i++) {
 			System.out.println(songInfo[i]+"");
-		}
+		}*/
 		/* End Test LastFMWrapper */
 		
 		/* Begin Test MusicMap */

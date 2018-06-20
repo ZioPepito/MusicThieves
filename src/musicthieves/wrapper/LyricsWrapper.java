@@ -13,18 +13,27 @@ public class LyricsWrapper {
 		
 	}
 	
-	public String[] search(String input) throws IOException {
+	public String[] search(String input) {
+		String[] results = new String[5];
 		
+		try {
 		Document doc = Jsoup.connect("https://www.lyrics.com/lyrics/"+URLEncoder.encode(input, "UTF-8")).get();
 		Element firstResult = doc.getElementsByClass("sec-lyric clearfix").first();
 		
-		String[] results = new String[5];
 		results[0] = firstResult.getElementsByClass("lyric-meta-title").first().text();
 		results[1] = firstResult.getElementsByClass("lyric-meta-artists").first().text();
 		results[2] = firstResult.getElementsByClass("lyric-meta-album").first().text();
 		results[3] = firstResult.getElementsByClass("lyric-meta-album-year").first().text();
 		results[4] = "https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
 				getElementsByTag("a").first().attr("href").toString();
+		}
+		catch(NullPointerException e) {
+			return null;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 		return results;
 	}
