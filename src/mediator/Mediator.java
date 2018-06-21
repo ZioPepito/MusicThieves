@@ -19,7 +19,7 @@ public class Mediator {
 	
 	
 	public static void main(String[] args) {
-		Song result=searchByKey("unforgiven");
+		Song result=searchByKey("follie");
 		System.out.println(result);
 		System.out.println(result.getText());
 	}
@@ -58,9 +58,9 @@ public class Mediator {
 		for (int i=0;i<lfmResults.size();i++) {
 			float tmpWeight;
 			tmpWeight=LASTFM_WEIGHT*(1/(i+1));
-			int azPos=azResults.indexOf(azResults.get(i));
-			tmpWeight=azPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(azPos+1)));
-			if(azResults.get(i).equals(lyricsResult))
+			int azPos=azResults.indexOf(lfmResults.get(i));
+			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			if(lfmResults.get(i).equals(lyricsResult))
 				tmpWeight+=LYRICS_WEIGHT;
 			if(lfmBest==null || tmpWeight>lfmWeight) {
 				lfmBest=lfmResults.get(i);
@@ -79,6 +79,8 @@ public class Mediator {
 			int lfmPos=lfmResults.indexOf(lyricsBest);
 			lyricsWeight=lfmPos<0?lyricsWeight:lyricsWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
 		}
+		
+		//System.out.println(azBest+"\n"+lfmBest+"\n"+lyricsBest);
 		
 		if(azWeight==0 && lfmWeight==0 && lyricsWeight==0)
 			return null;
