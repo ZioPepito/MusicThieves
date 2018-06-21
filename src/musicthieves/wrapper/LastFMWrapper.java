@@ -23,17 +23,17 @@ public class LastFMWrapper {
 		try {
 			doc = Jsoup.connect("https://ws.audioscrobbler.com/2.0/?method=track.search&track="+
 					URLEncoder.encode(input, "UTF-8")+"&api_key="	+ API_KEY).get();
-			for(int i = 0; i < 1; i++) {
+			for(int i = 0; i < 5; i++) {
 				results.add(new Song(doc.getElementsByTag("track").get(i).getElementsByTag("name").first().text() , doc.getElementsByTag("track").get(i).getElementsByTag("artist").first().text(),null));
 			}
 		} catch(NullPointerException e) {
-			return null;
+			e.printStackTrace();
 		}
 		catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			return null;
+			e.printStackTrace();
 		}
 		return results;
 	}

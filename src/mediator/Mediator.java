@@ -7,7 +7,9 @@ import com.google.api.services.youtube.model.SearchResult;
 import musicthieves.wrapper.*;
 
 public class Mediator {
-	
+
+	public static final int AZ_WEIGHT=3, LASTFM_WEIGHT=2, LYRICS_WEIGHT=1; 
+
 	private static AZlyricsWrapper az= new AZlyricsWrapper();;
 	private static LastFMWrapper lfm=new LastFMWrapper();
 	private static LyricsWrapper ly=new LyricsWrapper();
@@ -16,29 +18,80 @@ public class Mediator {
 	//private static SpotifyWrapper sp=new SpotifyWrapper();
 	
 	
+	public static void main(String[] args) {
+		Song result=searchByKey("unforgiven");
+		System.out.println(result);
+		System.out.println(result.getText());
+	}
+
+
 	public static Song searchByKey(String key) {
 		//AZLyrics
-		List<Song> results=az.searchByKey(key);
-		if(results!=null)
-			return results.get(0);
-
+		List<Song> azResults=az.searchByKey(key);
 		//lyrics
-		String[] lyricsResults=ly.search(key);
-		if(lyricsResults!=null) {
-			Song song=new Song(lyricsResults[0], lyricsResults[1], lyricsResults[4]);
-			song.setAlbum(lyricsResults[2]);
-			song.setAlbumYear(lyricsResults[3]);
-			return song;
+		Song lyricsResult=ly.search(key);
+		//lastfm
+		List<Song> lfmResults=lfm.getSong(key);
+
+
+		Song azBest=null;
+		float azWeight=0;
+
+		for (int i=0;i<azResults.size();i++) {
+			float tmpWeight;
+			tmpWeight=AZ_WEIGHT*(1/(i+1));
+			int lfmPos=lfmResults.indexOf(azResults.get(i));
+			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
+			if(azResults.get(i).equals(lyricsResult))
+				tmpWeight+=LYRICS_WEIGHT;
+			if(azBest==null || tmpWeight>azWeight) {
+				azBest=azResults.get(i);
+				azWeight=tmpWeight;
+			}
+
+		}
+
+
+		Song lfmBest=null;
+		float lfmWeight=0;
+
+		for (int i=0;i<lfmResults.size();i++) {
+			float tmpWeight;
+			tmpWeight=LASTFM_WEIGHT*(1/(i+1));
+			int azPos=azResults.indexOf(azResults.get(i));
+			tmpWeight=azPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(azPos+1)));
+			if(azResults.get(i).equals(lyricsResult))
+				tmpWeight+=LYRICS_WEIGHT;
+			if(lfmBest==null || tmpWeight>lfmWeight) {
+				lfmBest=lfmResults.get(i);
+				lfmWeight=tmpWeight;
+			}
+
+		}
+
+		Song lyricsBest=null;
+		float lyricsWeight=0;
+		if(lyricsResult!=null) {
+			lyricsBest=lyricsResult;
+			lyricsWeight=LYRICS_WEIGHT;
+			int azPos=azResults.indexOf(lyricsBest);
+			lyricsWeight=azPos<0?lyricsWeight:lyricsWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			int lfmPos=lfmResults.indexOf(lyricsBest);
+			lyricsWeight=lfmPos<0?lyricsWeight:lyricsWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
 		}
 		
-		results=lfm.getSong(key);
-		if(results!=null) {
-			return results.get(0);
-		}
-			
-		return null;
+		if(azWeight==0 && lfmWeight==0 && lyricsWeight==0)
+			return null;
+		
+		if(azWeight>=lfmWeight && azWeight>=lyricsWeight)
+			return azBest;
+		else if(lfmWeight>=azWeight && lfmWeight>=lyricsWeight)
+			return lfmBest;
+		else
+			return lyricsBest;
+
 	}
-	
+
 	public static String findOnYoutube(String keyword) {
 		SearchResult result=you.searchSong(keyword);
 		return result.getId().getVideoId();

@@ -16,7 +16,7 @@ import org.jsoup.select.Elements;
 
 public class AZlyricsWrapper {
 
-	public static final int MAX_RESULTS = 1;
+	public static final int MAX_RESULTS = 5;
 
 	private static String url = "https://search.azlyrics.com/search.php?q=";
 	
@@ -29,22 +29,21 @@ public class AZlyricsWrapper {
 	}
 
 	public List<Song> searchByKey(String key) {
-		List<Song> results= null;
+		List<Song> results=new ArrayList<Song>();
 		try {
 			Document doc = Jsoup.connect(url+URLEncoder.encode(key, "UTF-8")).get();
 			Elements songs = doc.getElementsByTag("table").last().getElementsByTag("tr");
 			int counter=0;
-			results=new ArrayList<Song>();
 			for (Element element : songs) {
 				if(counter>=MAX_RESULTS)
 					break; 
 				String text=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get().getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
-				results.add(new Song(element.getElementsByTag("a").first().child(0).html(), element.getElementsByTag("b").first().html(), text));
+				results.add(new Song(element.getElementsByTag("b").first().html(), element.getElementsByTag("b").get(1).html(), text));
 				counter++;
 			}
 
 		} catch(NullPointerException e) {
-			return null;
+			e.printStackTrace();
 		}		
 		catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

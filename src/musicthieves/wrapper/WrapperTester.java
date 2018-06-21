@@ -11,7 +11,7 @@ public class WrapperTester {
 		//search in lyric
 		String input = "aDSASDASDSAF";
 		LyricsWrapper lWrapper = new LyricsWrapper();
-		String[] data = lWrapper.search(input);
+		/*String[] data = lWrapper.search(input);
 
 		for(int i = 0; i < 4; i++) {
 			System.out.println(data[i]+"");
@@ -19,7 +19,7 @@ public class WrapperTester {
 
 		String lyric = lWrapper.getLyric(data[4]);		
 
-		System.out.println(lyric+"\n");
+		System.out.println(lyric+"\n");*/
 
 		//search album
 		String artist = lWrapper.searchAlbum("Master of puppets");
