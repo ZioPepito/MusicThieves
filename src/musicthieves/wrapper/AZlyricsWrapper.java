@@ -19,7 +19,7 @@ public class AZlyricsWrapper {
 	public static final int MAX_RESULTS = 5;
 
 	private static String url = "https://search.azlyrics.com/search.php?q=";
-	
+
 	public static void main(String[] args) {
 		AZlyricsWrapper az=new AZlyricsWrapper();
 		List<Song> res=az.searchByKey("");
@@ -37,9 +37,11 @@ public class AZlyricsWrapper {
 			for (Element element : songs) {
 				if(counter>=MAX_RESULTS)
 					break; 
-				String text=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get().getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
-				results.add(new Song(element.getElementsByTag("b").first().html(), element.getElementsByTag("b").get(1).html(), text));
-				counter++;
+				if(element.getElementsByClass("glyphicon-chevron-right").size()==0) {
+					String text=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get().getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
+					results.add(new Song(element.getElementsByTag("b").first().html(), element.getElementsByTag("b").get(1).html(), text));
+					counter++;
+				}
 			}
 
 		} catch(NullPointerException e) {

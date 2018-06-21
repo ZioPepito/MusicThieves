@@ -19,7 +19,7 @@ public class Mediator {
 	
 	
 	public static void main(String[] args) {
-		Song result=searchByKey("follie");
+		Song result=searchByKey("aaaaaaa");
 		System.out.println(result);
 		System.out.println(result.getText());
 	}
