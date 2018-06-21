@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mediator.Mediator;
+import musicthieves.wrapper.Song;
+
 /**
  * Servlet implementation class searchServlet
  */
@@ -32,7 +35,21 @@ public class searchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Search: "+request.getParameter("searchInput")+" with option: "+request.getParameter("option")); 
+		String input = request.getParameter("searchInput");
+		int option = Integer.parseInt(request.getParameter("option"));
+		if(input!=null && input!="") {
+			if(option == 0) {
+				Song song = Mediator.searchByKey(input);
+				response.getWriter().append("Search in songs <br/>"+song.toString()+"<br/>"); 
+			}else if (option == 1) {
+				response.getWriter().append("Search in artists<br/>"); 
+			}else if (option == 2) {
+				response.getWriter().append("Search in lyrics<br/>"); 
+			}else {
+				response.getWriter().append("You shouldn't be here!<br/>"); 
+			}
+		}
+		response.getWriter().append("Search: "+input+" with option: "+option); 
 	}
 
 }
