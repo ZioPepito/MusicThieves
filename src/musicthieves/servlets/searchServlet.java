@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mediator.Mediator;
 import musicthieves.wrapper.Song;
@@ -39,8 +40,9 @@ public class searchServlet extends HttpServlet {
 		int option = Integer.parseInt(request.getParameter("option"));
 		if(input!=null && input!="") {
 			if(option == 0) {
-				Song song = Mediator.searchByKey(input);
-				response.getWriter().append("Search in songs <br/>"+song.toString()+"<br/>"); 
+				//Song song = Mediator.searchByKey(input);
+				HttpSession session = request.getSession();
+				session.setAttribute("searchResult", "sesso");
 			}else if (option == 1) {
 				response.getWriter().append("Search in artists<br/>"); 
 			}else if (option == 2) {
@@ -49,7 +51,7 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append("You shouldn't be here!<br/>"); 
 			}
 		}
-		response.getWriter().append("Search: "+input+" with option: "+option); 
+		response.sendRedirect("index.jsp");; 
 	}
 
 }
