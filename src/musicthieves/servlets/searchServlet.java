@@ -40,13 +40,15 @@ public class searchServlet extends HttpServlet {
 		int option = Integer.parseInt(request.getParameter("option"));
 		if(input!=null && input.trim()!="") {
 			if(option == 0) {
-				Song song = Mediator.searchByKey(input);
+				Song song = Mediator.searchByTitle(input);
 				HttpSession session = request.getSession();
 				session.setAttribute("searchResult", song.getTitle());
 			}else if (option == 1) {
 				response.getWriter().append("Search in artists<br/>"); 
 			}else if (option == 2) {
-				response.getWriter().append("Search in lyrics<br/>"); 
+				Song song = Mediator.searchByText(input);
+				HttpSession session = request.getSession();
+				session.setAttribute("searchResult", song.getTitle());
 			}else {
 				response.getWriter().append("You shouldn't be here!<br/>"); 
 			}

@@ -19,13 +19,13 @@ public class Mediator {
 	
 	
 	public static void main(String[] args) {
-		Song result=searchByKey("aaaaaaa");
+		Song result=searchByText("aaaaaaa");
 		System.out.println(result);
 		System.out.println(result.getText());
 	}
 
 
-	public static Song searchByKey(String key) {
+	public static Song searchByText(String key) {
 		//AZLyrics
 		List<Song> azResults=az.searchByKey(key);
 		//lyrics
@@ -92,6 +92,54 @@ public class Mediator {
 		else
 			return lyricsBest;
 
+	}
+	
+	public static Song searchByTitle(String key) {
+		//AZLyrics
+		List<Song> azResults=az.searchByKey(key);
+		//lastfm
+		List<Song> lfmResults=lfm.getSong(key);
+
+
+		Song azBest=null;
+		float azWeight=0;
+
+		for (int i=0;i<azResults.size();i++) {
+			float tmpWeight;
+			tmpWeight=AZ_WEIGHT*(1/(i+1));
+			int lfmPos=lfmResults.indexOf(azResults.get(i));
+			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
+			if(azBest==null || tmpWeight>azWeight) {
+				azBest=azResults.get(i);
+				azWeight=tmpWeight;
+			}
+
+		}
+
+
+		Song lfmBest=null;
+		float lfmWeight=0;
+
+		for (int i=0;i<lfmResults.size();i++) {
+			float tmpWeight;
+			tmpWeight=LASTFM_WEIGHT*(1/(i+1));
+			int azPos=azResults.indexOf(lfmResults.get(i));
+			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			if(lfmBest==null || tmpWeight>lfmWeight) {
+				lfmBest=lfmResults.get(i);
+				lfmWeight=tmpWeight;
+			}
+
+		}
+
+		
+		if(azWeight==0 && lfmWeight==0)
+			return null;
+		
+		if(azWeight>=lfmWeight)
+			return azBest;
+		else
+			return lfmBest;
 	}
 
 	public static String findOnYoutube(String keyword) {

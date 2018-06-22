@@ -28,8 +28,9 @@ public class LastFMWrapper {
 			}
 		} catch(NullPointerException e) {
 			e.printStackTrace();
-		}
-		catch (UnsupportedEncodingException e) {
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
