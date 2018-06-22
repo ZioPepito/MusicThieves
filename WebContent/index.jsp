@@ -46,7 +46,7 @@
 					<div class="navbar-collapse  collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="active"><a href="#home">Home</a></li>
-							<li><a href="#aboutAnchor">About</a></li>
+							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 					</div>
@@ -84,8 +84,8 @@
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
 								<div class="filler"></div>
-								<form id="searchForm" action="/MusicThieves/searchServlet" method="post">
-									<input type="text" placeholder="Search" name="searchInput" pattern=".{5,}" required title="write 5 letters or more"/>
+								<form id="searchForm" action="" method="post" onSubmit="getResults()">
+									<input type="text" id="input" placeholder="Search" name="searchInput" pattern=".{5,}" required title="write 5 letters or more"/>
 									<label class="radio-label">in songs<input type="radio" name="option" value="0" checked="checked" required/></label>
 									<label class="radio-label">in artists<input type="radio" name="option" value="1" required/></label>
 									<label class="radio-label">in lyrics<input type="radio" name="option" value="2" required/></label>
@@ -94,26 +94,9 @@
 								<div class="filler"></div>
 							</div>
 						</div>
-						<%
-						String song = (String) session.getAttribute("searchResult");
-							if(song != null){ 
-						%>
-								<div>
-									<div class="row">
-									  <div class="col-md-6"> <%=song%> </div>
-									  <div class="col-md-6"> <%=song%> </div>
-									</div>
-									<div class="row">
-									   <div class="col-md-6"> <%=song%> </div>
-									   <div class="col-md-6"> <%=song%> </div>
-									</div>
-								</div>
-						<% 
-							}else{%>
-						
-						<% 	
-							}
-						%>
+						<div id="results">
+							
+						</div>
 					</div>		
 				</div>			
 			</div>
@@ -121,11 +104,11 @@
 		</div>
 		<!--blockblack-->
 
-		<div id="aboutAnchor" class="spacer"></div>
+		<div id="about" class="spacer"></div>
 		<!-- blockblack -->
 		<div class="blockblack" id="blockblack2">
 			<!-- About Starts -->
-			<div id="about">
+			<div id="ab">
 				<div class="row">
 					<div class="col-lg-4 col-sm-4  col-xs-12">
 						<img src="assets/images/logo.png" class="img-responsive"
@@ -203,6 +186,17 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
 	<script type="text/javascript" src="assets/scripts/imgZoom.js"></script>
-
+	<script>
+	function getResults(){
+		$.post("/MusicThieves/searchServlet",
+			   {
+					searchInput:  $("#input").value() ,
+					option: document.querySelector('input[name="option"]:checked').value()
+			    },
+			    function(data, status){
+			    	$("#results").html(data);
+			    });
+	}					
+	</script>
 </body>
 </html>

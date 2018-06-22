@@ -17,13 +17,13 @@ import musicthieves.wrapper.Song;
 @WebServlet("/searchServlet")
 public class searchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public searchServlet() {
-        super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public searchServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,22 +38,29 @@ public class searchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String input = request.getParameter("searchInput");
 		int option = Integer.parseInt(request.getParameter("option"));
-		if(input!=null && input.trim()!="") {
-			if(option == 0) {
-				Song song = Mediator.searchByTitle(input);
-				HttpSession session = request.getSession();
-				session.setAttribute("searchResult", song.getTitle());
-			}else if (option == 1) {
-				response.getWriter().append("Search in artists<br/>"); 
-			}else if (option == 2) {
-				Song song = Mediator.searchByText(input);
-				HttpSession session = request.getSession();
-				session.setAttribute("searchResult", song.getTitle());
-			}else {
-				response.getWriter().append("You shouldn't be here!<br/>"); 
-			}
-		}
-		response.sendRedirect("index.jsp");; 
+//		if(input!=null && input.trim()!="") {
+//			if(option == 0) {
+//				Song song = Mediator.searchByTitle(input);
+//				HttpSession session = request.getSession();
+//				session.setAttribute("searchResult", song.getTitle());
+//			}else if (option == 1) {
+//				response.getWriter().append("Search in artists<br/>"); 
+//			}else if (option == 2) {
+//				Song song = Mediator.searchByText(input);
+//				HttpSession session = request.getSession();
+//				session.setAttribute("searchResult", song.getTitle());
+//			}else {
+//				response.getWriter().append("You shouldn't be here!<br/>"); 
+//			}
+//		}
+		response.getWriter().append("<div class=\"row\">\r\n" + 
+				"				<div class=\"col-md-6\"> lol </div>\r\n" + 
+				"				<div class=\"col-md-6\">lol </div>\r\n" + 
+				"			</div>\r\n" + 
+				"			<div class=\"row\">\r\n" + 
+				"				<div class=\"col-md-6\">llol </div>\r\n" + 
+				"				<div class=\"col-md-6\">lol </div>\r\n" + 
+				"			</div>"); 
+		System.out.println("AAAAAAAAAAAA");
 	}
-
 }
