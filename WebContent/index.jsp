@@ -95,7 +95,7 @@
 							</div>
 						</div>
 						<div id="results">
-							ciao
+							<!-- searchResults -->
 						</div>
 					</div>		
 				</div>			
@@ -167,10 +167,12 @@
 	<!-- Footer Starts -->
 	<div id="footer">
 		<div class="container">
-			Copyright Music Thieves <span style="float: right;">Developed
-				by <a href="http://www.facebook.com/gianmarco.russo.750">Gianmarco
-					Russo</a> & <a href="https://www.facebook.com/vincenzomario.conte">Vincenzo
-					Conte</a>
+			Copyright Music Thieves 
+			<span style="float: right;">
+				Developed by 
+				<a href="http://www.facebook.com/gianmarco.russo.750">Gianmarco Russo</a> 
+				& 
+				<a href="https://www.facebook.com/vincenzomario.conte">Vincenzo Conte</a>
 			</span>
 		</div>
 	</div>

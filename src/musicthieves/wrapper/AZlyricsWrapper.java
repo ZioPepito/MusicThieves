@@ -24,7 +24,7 @@ public class AZlyricsWrapper {
 		AZlyricsWrapper az=new AZlyricsWrapper();
 		List<Song> res=az.searchByKey("");
 		for (Song song : res) {
-			System.out.println(song.getText());
+			System.out.println(song.getLyric());
 		}
 	}
 

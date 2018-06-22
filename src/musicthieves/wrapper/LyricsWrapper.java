@@ -2,10 +2,13 @@ package musicthieves.wrapper;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class LyricsWrapper {
 	
@@ -24,7 +27,7 @@ public class LyricsWrapper {
 		s.setArtist(firstResult.getElementsByClass("lyric-meta-artists").first().text());
 		s.setAlbum(firstResult.getElementsByClass("lyric-meta-album").first().text());
 		s.setAlbumYear(firstResult.getElementsByClass("lyric-meta-album-year").first().text());
-		s.setText("https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
+		s.setLyric("https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
 				getElementsByTag("a").first().attr("href").toString());
 		}
 		catch(NullPointerException e) {
@@ -46,15 +49,24 @@ public class LyricsWrapper {
 		return lyric;
 	}
 
-	public String searchAlbum(String input) throws IOException {
+	public List<String> searchArtist(String input) throws IOException {
 		
 		Document doc = Jsoup.connect("https://www.lyrics.com/serp.php?st="+
-				URLEncoder.encode(input, "UTF-8")+"&qtype=3").get();
+				URLEncoder.encode(input, "UTF-8")+"&qtype=2").get();
 		Element firstResult = doc.getElementsByClass("tal qx").first().getElementsByTag("a").first();
 		
-		Document doc1 = Jsoup.connect("https://www.lyrics.com"+firstResult.attr("href").toString()).get();
-		String artist = doc1.getElementsByClass("hg1p23").first().getElementsByTag("h2").first().text();
+		Document doc1 = Jsoup.connect("https://www.lyrics.com/"+firstResult.attr("href").toString()).get();
+		Elements links = doc1.getElementsByClass("rc3");
 		
-		return artist;
+		String linkToArtist = links.get(2).attr("href").toString();
+		Document doc2 = Jsoup.connect("https://www.lyrics.com/"+linkToArtist).get();
+		
+		Elements results = doc2.getElementsByTag("tr");
+		List<String> songs = new ArrayList<>();
+		for(int i = 1; i <= 5; i++) {
+			songs.add(results.get(i).getElementsByTag("strong").first().text());
+		}
+		
+		return songs;
 	}
 }

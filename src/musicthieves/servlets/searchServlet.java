@@ -38,29 +38,69 @@ public class searchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String input = request.getParameter("searchInput");
 		int option = Integer.parseInt(request.getParameter("option"));
-//		if(input!=null && input.trim()!="") {
-//			if(option == 0) {
-//				Song song = Mediator.searchByTitle(input);
-//				HttpSession session = request.getSession();
-//				session.setAttribute("searchResult", song.getTitle());
-//			}else if (option == 1) {
-//				response.getWriter().append("Search in artists<br/>"); 
-//			}else if (option == 2) {
-//				Song song = Mediator.searchByText(input);
-//				HttpSession session = request.getSession();
-//				session.setAttribute("searchResult", song.getTitle());
-//			}else {
-//				response.getWriter().append("You shouldn't be here!<br/>"); 
-//			}
-//		}
-		response.getWriter().append("<div class=\"row\">\r\n" + 
-				"<div class=\"col-md-6\">lol </div>\r\n" + 
-				"<div class=\"col-md-6\">lol </div>\r\n" + 
-				"</div>\r\n" + 
-				"<div class=\"row\">\r\n" + 
-				"<div class=\"col-md-6\">llol </div>\r\n" + 
-				"<div class=\"col-md-6\">lol </div>\r\n" + 
-				"</div>"); 
+		if(input!=null && input.trim()!="") {
+			if(option == 0) {
+				Song song = Mediator.searchByTitle(input);
+				response.getWriter().append("<div class=\"row\">\r\n" + 
+						"<div class=\"col-md-6\">"+
+							"<h2>Song info</h2></br>" +
+							song.getTitle() +"</br>" +
+							song.getArtist() +"</br>");
+				if (song.getAlbum()!=null) {
+					response.getWriter().append(song.getAlbum() +"</br>");
+				}
+				if (song.getAlbumYear()!=null) {
+					response.getWriter().append(song.getAlbumYear() +"</br>");
+				}		
+				response.getWriter().append(		
+						" </div>\r\n" + 
+						"<div class=\"col-md-6\">"+
+							"<h2>Lyric</h2></br>" +
+							song.getLyric() +"</br>" +
+						"</div>\r\n" + 
+						"</div>\r\n" + 
+						"<div class=\"row\">\r\n" + 
+						"<div class=\"col-md-6\"> Spotify </div>\r\n" + 
+						"<div class=\"col-md-6\"> YouTube </div>\r\n" + 
+						"</div>"); 
+			}else if (option == 1) {
+				Song song ;
+			}else if (option == 2) {
+				Song song = Mediator.searchByLyric(input);
+				response.getWriter().append("<div class=\"row\">\r\n" + 
+						"<div class=\"col-md-6\">"+
+							"<h2>Song info</h2></br>" +
+							song.getTitle() +"</br>" +
+							song.getArtist() +"</br>");
+				if (song.getAlbum()!=null) {
+					response.getWriter().append(song.getAlbum() +"</br>");
+				}
+				if (song.getAlbumYear()!=null) {
+					response.getWriter().append(song.getAlbumYear() +"</br>");
+				}		
+				response.getWriter().append(		
+						" </div>\r\n" + 
+						"<div class=\"col-md-6\">"+
+							"<h2>Lyric</h2></br>" +
+							song.getLyric() +"</br>" +
+						"</div>\r\n" + 
+						"</div>\r\n" + 
+						"<div class=\"row\">\r\n" + 
+						"<div class=\"col-md-6\"> Spotify </div>\r\n" + 
+						"<div class=\"col-md-6\"> YouTube </div>\r\n" + 
+						"</div>"); 
+			}else {
+				response.getWriter().append("You shouldn't be here!<br/>"); 
+			}
+		}
+//		response.getWriter().append("<div class=\"row\">\r\n" + 
+//				"<div class=\"col-md-6\"> </div>\r\n" + 
+//				"<div class=\"col-md-6\"> </div>\r\n" + 
+//				"</div>\r\n" + 
+//				"<div class=\"row\">\r\n" + 
+//				"<div class=\"col-md-6\"> </div>\r\n" + 
+//				"<div class=\"col-md-6\"> </div>\r\n" + 
+//				"</div>"); 
 		System.out.println(input+" "+option);
 	}
 }

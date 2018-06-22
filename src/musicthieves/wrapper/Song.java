@@ -2,16 +2,16 @@ package musicthieves.wrapper;
 
 public class Song {
 
-	private String title, artist, album, albumYear, text;
+	private String title, artist, album, albumYear, lyric;
 	
 	public Song() {
 	}
 
 
-	public Song(String title, String artist, String text) {
+	public Song(String title, String artist, String lyric) {
 		this.title = title.trim();
 		this.artist = artist;
-		this.text = text;
+		this.lyric = lyric;
 	}
 
 	public String getTitle() {
@@ -46,12 +46,12 @@ public class Song {
 		this.albumYear = albumYear;
 	}
 
-	public String getText() {
-		return text;
+	public String getLyric() {
+		return lyric;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setLyric(String lyric) {
+		this.lyric = lyric;
 	}
 
 

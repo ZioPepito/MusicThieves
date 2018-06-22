@@ -1,6 +1,7 @@
 package musicthieves.wrapper;
 
 import java.io.IOException;
+import java.util.List;
 
 public class WrapperTester {
 
@@ -9,32 +10,31 @@ public class WrapperTester {
 		/* Begin Test LyricsWrapper */
 		System.out.println("TEST LYRICS\n");
 		//search in lyric
-		String input = "aDSASDASDSAF";
+		String input = "non mi riconosco più prosopagnosia";
 		LyricsWrapper lWrapper = new LyricsWrapper();
-		/*String[] data = lWrapper.search(input);
+		Song song = lWrapper.search(input);
 
-		for(int i = 0; i < 4; i++) {
-			System.out.println(data[i]+"");
-		}
+		System.out.println(song.getTitle()+"");
 
-		String lyric = lWrapper.getLyric(data[4]);		
+		String lyric = lWrapper.getLyric(song.getLyric());		
 
-		System.out.println(lyric+"\n");*/
+		System.out.println(lyric+"\n");
 
 		//search album
-		String artist = lWrapper.searchAlbum("Master of puppets");
-		System.out.println("L'artista dell'album cercato ï¿½: "+artist+"\n");
+		List<String> songs = lWrapper.searchArtist("Caparezza");
+		System.out.println("Alcune canzoni dell'artista cercato: "+songs.get(0)+", " +songs.get(1)+", " +
+				songs.get(2)+", " +songs.get(3)+", " +songs.get(4)+", " +"\n");
 		/* End Test LyricsWrapper */
 
 		System.out.println("TEST LASTFM\n");
 		/* Begin Test LastFMWrapper */
 		String input1 = "follie";
 		LastFMWrapper LFMWrapper = new LastFMWrapper();
-		/*String[] songInfo = LFMWrapper.getSong(input1);
+		List<Song> songInfo = LFMWrapper.getSong(input1);
 		System.out.println("Risultati per '"+input1+"': ");
 		for(int i = 0; i < 5; i++) {
-			System.out.println(songInfo[i]+"");
-		}*/
+			System.out.println(songInfo.get(i).getTitle()+"");
+		}
 		/* End Test LastFMWrapper */
 		
 		/* Begin Test MusicMap */

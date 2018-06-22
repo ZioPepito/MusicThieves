@@ -19,13 +19,13 @@ public class Mediator {
 	
 	
 	public static void main(String[] args) {
-		Song result=searchByText("aaaaaaa");
+		Song result=searchByLyric("aaaaaaa");
 		System.out.println(result);
-		System.out.println(result.getText());
+		System.out.println(result.getLyric());
 	}
 
 
-	public static Song searchByText(String key) {
+	public static Song searchByLyric(String key) {
 		//AZLyrics
 		List<Song> azResults=az.searchByKey(key);
 		//lyrics
