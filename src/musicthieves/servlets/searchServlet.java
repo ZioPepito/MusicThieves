@@ -54,13 +54,13 @@ public class searchServlet extends HttpServlet {
 //			}
 //		}
 		response.getWriter().append("<div class=\"row\">\r\n" + 
-				"				<div class=\"col-md-6\"> lol </div>\r\n" + 
-				"				<div class=\"col-md-6\">lol </div>\r\n" + 
-				"			</div>\r\n" + 
-				"			<div class=\"row\">\r\n" + 
-				"				<div class=\"col-md-6\">llol </div>\r\n" + 
-				"				<div class=\"col-md-6\">lol </div>\r\n" + 
-				"			</div>"); 
-		System.out.println("AAAAAAAAAAAA");
+				"<div class=\"col-md-6\">lol </div>\r\n" + 
+				"<div class=\"col-md-6\">lol </div>\r\n" + 
+				"</div>\r\n" + 
+				"<div class=\"row\">\r\n" + 
+				"<div class=\"col-md-6\">llol </div>\r\n" + 
+				"<div class=\"col-md-6\">lol </div>\r\n" + 
+				"</div>"); 
+		System.out.println(input+" "+option);
 	}
 }

@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="assets/bootstrap/css/social.css" />
 <link rel="stylesheet" href="assets/animate.css">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="icon" href="assets/images/logo.png" />
 
 </head>
@@ -84,8 +84,8 @@
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
 								<div class="filler"></div>
-								<form id="searchForm" action="" method="post" onSubmit="getResults()">
-									<input type="text" id="input" placeholder="Search" name="searchInput" pattern=".{5,}" required title="write 5 letters or more"/>
+								<form id="searchForm" action="" method="post" onSubmit="getResults(); return false;">
+									<input type="text" id="input" placeholder="Search" name="searchInput" pattern=".{5,}" required title="write 5 letters or more" value=""/>
 									<label class="radio-label">in songs<input type="radio" name="option" value="0" checked="checked" required/></label>
 									<label class="radio-label">in artists<input type="radio" name="option" value="1" required/></label>
 									<label class="radio-label">in lyrics<input type="radio" name="option" value="2" required/></label>
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 						<div id="results">
-							
+							ciao
 						</div>
 					</div>		
 				</div>			
@@ -190,8 +190,8 @@
 	function getResults(){
 		$.post("/MusicThieves/searchServlet",
 			   {
-					searchInput:  $("#input").value() ,
-					option: document.querySelector('input[name="option"]:checked').value()
+					searchInput:  document.querySelector('#input').value,
+					option: document.querySelector('input[name="option"]:checked').value
 			    },
 			    function(data, status){
 			    	$("#results").html(data);
