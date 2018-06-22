@@ -18,6 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="icon" href="assets/images/logo.png" />
 
+
 </head>
 <body>
 
@@ -94,8 +95,11 @@
 								<div class="filler"></div>
 							</div>
 						</div>
-						<div id="results">
+						<div>
 							<!-- searchResults -->
+							<i id="loader" class="fa fa-spinner fa-spin" style="font-size:30px; display:none;"></i>
+							<div id="results" style="display:none">
+							</div>
 						</div>
 					</div>		
 				</div>			
@@ -190,6 +194,8 @@
 	<script type="text/javascript" src="assets/scripts/imgZoom.js"></script>
 	<script>
 	function getResults(){
+		$("#results").css("display","none");
+		$("#loader").css("display", "inline-block");
 		$.post("/MusicThieves/searchServlet",
 			   {
 					searchInput:  document.querySelector('#input').value,
@@ -197,6 +203,8 @@
 			    },
 			    function(data, status){
 			    	$("#results").html(data);
+			    	$("#loader").css("display", "none");
+			    	$("#results").css("display","block");
 			    });
 	}					
 	</script>
