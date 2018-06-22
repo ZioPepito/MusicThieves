@@ -38,11 +38,11 @@ public class searchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String input = request.getParameter("searchInput");
 		int option = Integer.parseInt(request.getParameter("option"));
-		if(input!=null && input!="") {
+		if(input!=null && input.trim()!="") {
 			if(option == 0) {
-				//Song song = Mediator.searchByKey(input);
+				Song song = Mediator.searchByKey(input);
 				HttpSession session = request.getSession();
-				session.setAttribute("searchResult", "sesso");
+				session.setAttribute("searchResult", song.getTitle());
 			}else if (option == 1) {
 				response.getWriter().append("Search in artists<br/>"); 
 			}else if (option == 2) {

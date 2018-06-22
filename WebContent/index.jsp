@@ -86,7 +86,7 @@
 								<div class="filler"></div>
 								<form id="searchForm" action="/MusicThieves/searchServlet" method="post">
 									<input type="text" placeholder="Search" name="searchInput" pattern=".{5,}" required title="write 5 letters or more"/>
-									<label class="radio-label">in songs<input type="radio" name="option" value="0" required/></label>
+									<label class="radio-label">in songs<input type="radio" name="option" value="0" checked="checked" required/></label>
 									<label class="radio-label">in artists<input type="radio" name="option" value="1" required/></label>
 									<label class="radio-label">in lyrics<input type="radio" name="option" value="2" required/></label>
 									<input type="submit" id="subButton" class="btn btn-warning bgcolor" value="Send"/>
