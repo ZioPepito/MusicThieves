@@ -56,12 +56,18 @@ public class searchServlet extends HttpServlet {
 						" </div>\r\n" + 
 						"<div class=\"col-md-6\">"+
 							"<h2>Lyric</h2></br>" +
-							song.getLyric() +"</br>" +
+							"<div class=\"pre-scrollable\">"+
+								song.getLyric() +"</br>" +
+							"</div>"+
 						"</div>\r\n" + 
 						"</div>\r\n" + 
 						"<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\"> Spotify </div>\r\n" + 
-						"<div class=\"col-md-6\"> YouTube </div>\r\n" + 
+						"<div class=\"col-md-6\"> "+
+							"<h2>Audio</h2></br>" +
+						" </div>\r\n" + 
+						"<div class=\"col-md-6\">" +
+							"<h2>Video</h2></br>" + 
+						"</div>\r\n" + 
 						"</div>"); 
 			}else if (option == 1) {
 				Song song ;
@@ -79,15 +85,21 @@ public class searchServlet extends HttpServlet {
 					response.getWriter().append(song.getAlbumYear() +"</br>");
 				}		
 				response.getWriter().append(		
-						" </div>\r\n" + 
+						"</div>\r\n" + 
 						"<div class=\"col-md-6\">"+
 							"<h2>Lyric</h2></br>" +
+							"<div class=\"pre-scrollable\">"+
 							song.getLyric() +"</br>" +
+							"</div>"+
 						"</div>\r\n" + 
 						"</div>\r\n" + 
 						"<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\"> Spotify </div>\r\n" + 
-						"<div class=\"col-md-6\"> YouTube </div>\r\n" + 
+						"<div class=\"col-md-6\"> "+
+							"<h2>Audio</h2></br>" +
+						" </div>\r\n" + 
+						"<div class=\"col-md-6\">" +
+							"<h2>Video</h2></br>" + 
+						"</div>\r\n" + 
 						"</div>"); 
 			}else {
 				response.getWriter().append("You shouldn't be here!<br/>"); 
