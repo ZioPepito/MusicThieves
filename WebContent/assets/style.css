@@ -49,6 +49,15 @@ h5{font-size: 20px;}
 	padding:6px;
 }
 
+.resultDiv{
+	padding: 5px;
+	margin: 5px 5px 5px 0px;
+}
+
+.resultDiv > h2{
+	color: gold;
+}
+
 #subButton{
 	font-size: 20px;
 }

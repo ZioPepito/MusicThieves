@@ -120,7 +120,7 @@
 						<img src="assets/images/logo.png" class="img-responsive"
 							alt="about" />
 					</div>
-					<div class="col-lg-5 col-sm-8  col-xs-12">
+					<div class="col-lg-6 col-sm-8  col-xs-12">
 						<h3>
 							<span class="glyphicon glyphicon-music"></span> About Music
 							Thieves

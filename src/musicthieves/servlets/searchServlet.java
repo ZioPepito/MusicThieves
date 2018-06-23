@@ -46,8 +46,8 @@ public class searchServlet extends HttpServlet {
 				String videoID=Mediator.findOnYoutube(song.getTitle());
 				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
 				response.getWriter().append(
-						"<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\">"+
+						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
+						"<div class=\"col-md-5 resultDiv\">"+
 							"<h2>Song info</h2></br>" +
 							song.getTitle() +"</br>" +
 							song.getArtist() +"</br>");
@@ -60,25 +60,25 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append("</br><h2>You might also like</h2></br>");
 				for(int i = 0; i < 5; i++) {
 					response.getWriter().append(
-							"<a style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
+							"<span style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
 									relatedArtists.get(i) + "</br>"+
-							"</a>"
+							"</span>"
 							);
 				}
 				response.getWriter().append(
 						" </div>\r\n" + 
-						"<div class=\"col-md-6\">"+
+						"<div class=\"col-md-5 resultDiv\">"+
 							"<h2>Lyric</h2></br>" +
 							"<div class=\"pre-scrollable\">"+
 								song.getLyric() +"</br>" +
 							"</div>"+
 						"</div>\r\n" + 
 						"</div>\r\n" + 
-						"<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\"> "+
+						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
+						"<div class=\"col-md-5 resultDiv\"> "+
 							"<h2>Audio</h2></br>" +
 						" </div>\r\n" + 
-						"<div class=\"col-md-6\">" +
+						"<div class=\"col-md-5 resultDiv\">" +
 							"<h2>Video</h2></br>" +
 						"<div class=\"resp-container\">\n" + 
 						"    <iframe class=\"resp-iframe\" src=\"https://www.youtube.com/embed/"+videoID+"\" gesture=\"media\"  allow=\"encrypted-media\" allowfullscreen></iframe>\n" + 
@@ -91,12 +91,12 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append(
 						"<div class=\"row\">\r\n" + 
 							"<div class=\"col-sm-6 col-sm-offset-3\"> " +
-								"<h2>Some songs of the searched artist</h2></br>");
+								"<h2 style=\"color: gold;\">Some songs of the searched artist</h2></br>");
 				for(int i = 0; i < 5; i++) {
 					response.getWriter().append(
-							"<a style=\"cursor: pointer\" onClick=\"autoSearch('"+songs.get(i).replace("'", " ")+"')\">"+
+							"<span style=\"cursor: pointer\" onClick=\"autoSearch('"+songs.get(i).replace("'", " ")+"')\">"+
 									songs.get(i) +
-							"</a></br>"
+							"</span></br>"
 							);
 				}
 				response.getWriter().append(			
@@ -106,8 +106,8 @@ public class searchServlet extends HttpServlet {
 				Song song = Mediator.searchByLyric(input);
 				String videoID=Mediator.findOnYoutube(song.getTitle());
 				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
-				response.getWriter().append("<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\">"+
+				response.getWriter().append("<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
+						"<div class=\"col-md-5 resultDiv\">"+
 							"<h2>Song info</h2></br>" +
 							song.getTitle() +"</br>" +
 							song.getArtist() +"</br>");
@@ -120,25 +120,25 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append("</br><h2>You might also like</h2></br>");
 				for(int i = 0; i < 5; i++) {
 					response.getWriter().append(
-							"<a style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
+							"<span style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
 									relatedArtists.get(i) + "</br>"+
-							"</a>"
+							"</span>"
 							);
 				}
 				response.getWriter().append(		
 						" </div>\r\n" + 
-						"<div class=\"col-md-6\">"+
+						"<div class=\"col-md-5 resultDiv\">"+
 							"<h2>Lyric</h2></br>" +
 							"<div class=\"pre-scrollable\">"+
 								song.getLyric() +"</br>" +
 							"</div>"+
 						"</div>\r\n" + 
 						"</div>\r\n" + 
-						"<div class=\"row\">\r\n" + 
-						"<div class=\"col-md-6\"> "+
+						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
+						"<div class=\"col-md-5 resultDiv\"> "+
 							"<h2>Audio</h2></br>" +
 						" </div>\r\n" + 
-						"<div class=\"col-md-6\">" +
+						"<div class=\"col-md-5 resultDiv\">" +
 							"<h2>Video</h2></br>" +
 						"<div class=\"resp-container\">\n" + 
 						"    <iframe class=\"resp-iframe\" src=\"https://www.youtube.com/embed/"+videoID+"\" gesture=\"media\"  allow=\"encrypted-media\" allowfullscreen></iframe>\n" + 
@@ -150,14 +150,6 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append("You shouldn't be here!<br/>"); 
 			}
 		}
-//		response.getWriter().append("<div class=\"row\">\r\n" + 
-//				"<div class=\"col-md-6\"> </div>\r\n" + 
-//				"<div class=\"col-md-6\"> </div>\r\n" + 
-//				"</div>\r\n" + 
-//				"<div class=\"row\">\r\n" + 
-//				"<div class=\"col-md-6\"> </div>\r\n" + 
-//				"<div class=\"col-md-6\"> </div>\r\n" + 
-//				"</div>"); 
 		System.out.println(input+" "+option);
 	}
 }
