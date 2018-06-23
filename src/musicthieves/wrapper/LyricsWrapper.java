@@ -28,8 +28,8 @@ public class LyricsWrapper {
 			s.setArtist(firstResult.getElementsByClass("lyric-meta-artists").first().text());
 			s.setAlbum(firstResult.getElementsByClass("lyric-meta-album").first().text());
 			s.setAlbumYear(firstResult.getElementsByClass("lyric-meta-album-year").first().text());
-			s.setLyric("https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
-					getElementsByTag("a").first().attr("href").toString());
+			s.setLyric(getLyric("https://www.lyrics.com"+firstResult.getElementsByClass("lyric-meta-title").first().
+					getElementsByTag("a").first().attr("href").toString()));
 		}
 		catch(NullPointerException e) {
 			return null;
