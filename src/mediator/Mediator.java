@@ -1,5 +1,6 @@
 package mediator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.api.services.youtube.model.SearchResult;
@@ -150,6 +151,11 @@ public class Mediator {
 	public static List<String> searchByArtist(String key) {
 		List<String> songs = ly.searchArtist(key);
 		return songs;
+	}
+	
+	public static List<String> searchRelateArtist(String key) {
+		List<String> results = mMap.relatedArtists(key);
+		return results;
 	}
 
 }

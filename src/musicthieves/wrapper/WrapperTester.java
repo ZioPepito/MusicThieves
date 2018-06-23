@@ -41,11 +41,11 @@ public class WrapperTester {
 		System.out.println("\nTEST MUSICMAP\n");
 		String input2 = "Dream Theater";
 		MusicMapWrapper mapWrapper = new MusicMapWrapper();
-		String[] relatedArtist = mapWrapper.relatedArtists(input2);
+		List<String> relatedArtist = mapWrapper.relatedArtists(input2);
 
 		System.out.println("Hai cercato "+input2+". Potrebbero piacerti:");
 		for(int i = 0; i < 5; i++) {
-			System.out.println(relatedArtist[i]);
+			System.out.println(relatedArtist.get(i));
 		}
 		/* End Test MusicMap */
 	}

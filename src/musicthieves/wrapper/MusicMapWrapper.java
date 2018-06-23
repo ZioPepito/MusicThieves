@@ -1,7 +1,9 @@
 package musicthieves.wrapper;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -14,13 +16,20 @@ public class MusicMapWrapper {
 		
 	}
 
-	public String[] relatedArtists(String artist) throws IOException {
-		String[] results = new String[5];
+	public List<String> relatedArtists(String artist) {
+		List<String> results = new ArrayList<>();
+		List<Element> elements = null;
 		
-		Document doc = Jsoup.connect("https://www.music-map.com/"+URLEncoder.encode(artist, "UTF-8")+".html").get();
-		List<Element> elements = doc.getElementsByClass("S");
+		try {
+			Document doc = Jsoup.connect("https://www.music-map.com/"+URLEncoder.encode(artist, "UTF-8")+".html").get();
+			elements = doc.getElementsByClass("S");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		for(int i = 0; i < 5; i++) {
-			results[i] = elements.get(i+1).text();
+			results.add(elements.get(i+1).text());
 		}
 		
 		return results;

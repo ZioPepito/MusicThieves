@@ -225,6 +225,21 @@
 			    	$("#results").css("display","block");
 			    });
 	}
+	function autoSearchArtist(artist){
+		$("#results").html("");
+		$("#results").css("display","none");
+		$("#loader").css("display", "inline-block");
+		$.post("/MusicThieves/searchServlet",
+			   {
+					searchInput:  artist,
+					option: "1"
+			    },
+			    function(data, status){
+			    	$("#results").html(data);
+			    	$("#loader").css("display", "none");
+			    	$("#results").css("display","block");
+			    });
+	}
 	</script>
 </body>
 </html>
