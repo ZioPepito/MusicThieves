@@ -90,7 +90,7 @@ public class searchServlet extends HttpServlet {
 				response.getWriter().append(
 						"<div class=\"row\">\r\n" + 
 							"<div class=\"col-sm-6 col-sm-offset-3\"> " +
-								"<h2 style=\"color: gold;\">Some songs of the searched artist</h2></br>");
+								"<h2 style=\"color: #DAA520;\">Some songs of the searched artist</h2></br>");
 				for(int i = 0; i < 5; i++) {
 					response.getWriter().append(
 							"<span style=\"cursor: pointer\" onClick=\"autoSearch('"+songs.get(i).replace("'", " ")+"')\">"+
