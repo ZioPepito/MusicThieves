@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import mediator.Mediator;
 import musicthieves.wrapper.Song;
@@ -44,9 +43,7 @@ public class searchServlet extends HttpServlet {
 			if(option == 0) {
 				Song song = Mediator.searchByTitle(input);
 				String videoID=Mediator.findOnYoutube(song.getTitle());
-				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
-				response.getWriter().append(
-						"<div class=\"row\">\r\n" + 
+				response.getWriter().append("<div class=\"row\">\r\n" + 
 						"<div class=\"col-md-6\">"+
 							"<h2>Song info</h2></br>" +
 							song.getTitle() +"</br>" +
@@ -56,16 +53,8 @@ public class searchServlet extends HttpServlet {
 				}
 				if (song.getAlbumYear()!=null) {
 					response.getWriter().append(song.getAlbumYear() +"</br>");
-				}	
-				response.getWriter().append("</br><h2>You might also like</h2></br>");
-				for(int i = 0; i < 5; i++) {
-					response.getWriter().append(
-							"<a style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
-									relatedArtists.get(i) + "</br>"+
-							"</a>"
-							);
-				}
-				response.getWriter().append(
+				}		
+				response.getWriter().append(		
 						" </div>\r\n" + 
 						"<div class=\"col-md-6\">"+
 							"<h2>Lyric</h2></br>" +
@@ -105,7 +94,6 @@ public class searchServlet extends HttpServlet {
 			}else if (option == 2) {
 				Song song = Mediator.searchByLyric(input);
 				String videoID=Mediator.findOnYoutube(song.getTitle());
-				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
 				response.getWriter().append("<div class=\"row\">\r\n" + 
 						"<div class=\"col-md-6\">"+
 							"<h2>Song info</h2></br>" +
@@ -116,15 +104,7 @@ public class searchServlet extends HttpServlet {
 				}
 				if (song.getAlbumYear()!=null) {
 					response.getWriter().append(song.getAlbumYear() +"</br>");
-				}	
-				response.getWriter().append("</br><h2>You might also like</h2></br>");
-				for(int i = 0; i < 5; i++) {
-					response.getWriter().append(
-							"<a style=\"cursor: pointer\" onClick=\"autoSearchArtist('"+relatedArtists.get(i).replace("'", " ")+"')\">"+
-									relatedArtists.get(i) + "</br>"+
-							"</a>"
-							);
-				}
+				}		
 				response.getWriter().append(		
 						" </div>\r\n" + 
 						"<div class=\"col-md-6\">"+
