@@ -47,6 +47,7 @@ public class Song {
 	}
 
 	public String getLyric() {
+		if(lyric == null) return "Lyric not found";
 		return lyric;
 	}
 

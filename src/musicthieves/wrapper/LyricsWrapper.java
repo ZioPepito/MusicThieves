@@ -1,6 +1,7 @@
 package musicthieves.wrapper;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +50,12 @@ public class LyricsWrapper {
 		return lyric;
 	}
 
-	public List<String> searchArtist(String input) throws IOException {
+	public List<String> searchArtist(String input){
+		Elements results;
 		
-		Document doc = Jsoup.connect("https://www.lyrics.com/serp.php?st="+
-				URLEncoder.encode(input, "UTF-8")+"&qtype=2").get();
+		try {
+			Document doc = Jsoup.connect("https://www.lyrics.com/serp.php?st="+
+					URLEncoder.encode(input, "UTF-8")+"&qtype=2").get();
 		Element firstResult = doc.getElementsByClass("tal qx").first().getElementsByTag("a").first();
 		
 		Document doc1 = Jsoup.connect("https://www.lyrics.com/"+firstResult.attr("href").toString()).get();
@@ -61,9 +64,14 @@ public class LyricsWrapper {
 		String linkToArtist = links.get(2).attr("href").toString();
 		Document doc2 = Jsoup.connect("https://www.lyrics.com/"+linkToArtist).get();
 		
-		Elements results = doc2.getElementsByTag("tr");
+		results = doc2.getElementsByTag("tr");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		int offset = results.size()/2 - 2;
 		List<String> songs = new ArrayList<>();
-		for(int i = 1; i <= 5; i++) {
+		for(int i = offset; i <= offset+5; i++) {
 			songs.add(results.get(i).getElementsByTag("strong").first().text());
 		}
 		

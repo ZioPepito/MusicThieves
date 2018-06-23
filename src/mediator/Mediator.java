@@ -146,5 +146,10 @@ public class Mediator {
 		SearchResult result=you.searchSong(keyword);
 		return result.getId().getVideoId();
 	}
+	
+	public static List<String> searchByArtist(String key) {
+		List<String> songs = ly.searchArtist(key);
+		return songs;
+	}
 
 }

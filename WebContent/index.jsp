@@ -206,7 +206,21 @@
 			    	$("#loader").css("display", "none");
 			    	$("#results").css("display","block");
 			    });
-	}					
+	}	
+	function autoSearch(song){
+		$("#results").css("display","none");
+		$("#loader").css("display", "inline-block");
+		$.post("/MusicThieves/searchServlet",
+			   {
+					searchInput:  song,
+					option: "0"
+			    },
+			    function(data, status){
+			    	$("#results").html(data);
+			    	$("#loader").css("display", "none");
+			    	$("#results").css("display","block");
+			    });
+	}
 	</script>
 </body>
 </html>
