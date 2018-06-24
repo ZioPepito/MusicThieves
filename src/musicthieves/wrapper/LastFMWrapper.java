@@ -18,12 +18,11 @@ public class LastFMWrapper {
 
 	public List<Song>getSong(String input) {
 		List<Song> results=new ArrayList<Song>();
-
 		Document doc;
 		try {
 			doc = Jsoup.connect("https://ws.audioscrobbler.com/2.0/?method=track.search&track="+
 					URLEncoder.encode(input, "UTF-8")+"&api_key="	+ API_KEY).get();
-			for(int i = 0; i < 5; i++) {
+			for(int i = 0; i < 5 && i < doc.getElementsByTag("track").size(); i++) {
 				results.add(new Song(doc.getElementsByTag("track").get(i).getElementsByTag("name").first().text() , doc.getElementsByTag("track").get(i).getElementsByTag("artist").first().text(),null));
 			}
 		} catch(NullPointerException e) {

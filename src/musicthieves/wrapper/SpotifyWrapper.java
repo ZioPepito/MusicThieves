@@ -5,7 +5,6 @@ import java.net.*;
 
 import com.neovisionaries.i18n.CountryCode;
 import com.wrapper.spotify.*;
-import com.wrapper.spotify.enums.ModelObjectType;
 import com.wrapper.spotify.exceptions.*;
 import com.wrapper.spotify.model_objects.credentials.*;
 import com.wrapper.spotify.model_objects.special.SearchResult;

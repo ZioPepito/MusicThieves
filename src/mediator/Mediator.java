@@ -1,6 +1,5 @@
 package mediator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.api.services.youtube.model.SearchResult;
@@ -9,7 +8,7 @@ import musicthieves.wrapper.*;
 
 public class Mediator {
 
-	public static final int AZ_WEIGHT=3, LASTFM_WEIGHT=2, LYRICS_WEIGHT=1; 
+	public static final int AZ_WEIGHT=3, AZ_WEIGHT_TITLE=2, LASTFM_WEIGHT=2, LYRICS_WEIGHT=2; 
 
 	private static AZlyricsWrapper az= new AZlyricsWrapper();;
 	private static LastFMWrapper lfm=new LastFMWrapper();
@@ -42,7 +41,7 @@ public class Mediator {
 			float tmpWeight;
 			tmpWeight=AZ_WEIGHT*(1/(i+1));
 			int lfmPos=lfmResults.indexOf(azResults.get(i));
-			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
+			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1f/(lfmPos+1)));
 			if(azResults.get(i).equals(lyricsResult))
 				tmpWeight+=LYRICS_WEIGHT;
 			if(azBest==null || tmpWeight>azWeight) {
@@ -60,7 +59,7 @@ public class Mediator {
 			float tmpWeight;
 			tmpWeight=LASTFM_WEIGHT*(1/(i+1));
 			int azPos=azResults.indexOf(lfmResults.get(i));
-			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT*(1f/(azPos+1)));
 			if(lfmResults.get(i).equals(lyricsResult))
 				tmpWeight+=LYRICS_WEIGHT;
 			if(lfmBest==null || tmpWeight>lfmWeight) {
@@ -76,12 +75,11 @@ public class Mediator {
 			lyricsBest=lyricsResult;
 			lyricsWeight=LYRICS_WEIGHT;
 			int azPos=azResults.indexOf(lyricsBest);
-			lyricsWeight=azPos<0?lyricsWeight:lyricsWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			lyricsWeight=azPos<0?lyricsWeight:lyricsWeight+(AZ_WEIGHT*(1f/(azPos+1)));
 			int lfmPos=lfmResults.indexOf(lyricsBest);
-			lyricsWeight=lfmPos<0?lyricsWeight:lyricsWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
+			lyricsWeight=lfmPos<0?lyricsWeight:lyricsWeight+(LASTFM_WEIGHT*(1f/(lfmPos+1)));
 		}
 		
-		//System.out.println(azBest+"\n"+lfmBest+"\n"+lyricsBest);
 		
 		if(azWeight==0 && lfmWeight==0 && lyricsWeight==0)
 			return null;
@@ -100,6 +98,8 @@ public class Mediator {
 		List<Song> azResults=az.searchByKey(key);
 		//lastfm
 		List<Song> lfmResults=lfm.getSong(key);
+		//lyrics
+		Song lyricsResult=ly.search(key);
 
 
 		Song azBest=null;
@@ -107,9 +107,9 @@ public class Mediator {
 
 		for (int i=0;i<azResults.size();i++) {
 			float tmpWeight;
-			tmpWeight=AZ_WEIGHT*(1/(i+1));
+			tmpWeight=AZ_WEIGHT_TITLE*(1/(i+1));
 			int lfmPos=lfmResults.indexOf(azResults.get(i));
-			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1/(lfmPos+1)));
+			tmpWeight=lfmPos<0?tmpWeight:tmpWeight+(LASTFM_WEIGHT*(1f/(lfmPos+1)));
 			if(azBest==null || tmpWeight>azWeight) {
 				azBest=azResults.get(i);
 				azWeight=tmpWeight;
@@ -125,22 +125,35 @@ public class Mediator {
 			float tmpWeight;
 			tmpWeight=LASTFM_WEIGHT*(1/(i+1));
 			int azPos=azResults.indexOf(lfmResults.get(i));
-			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT*(1/(azPos+1)));
+			tmpWeight=azPos<0?tmpWeight:tmpWeight+(AZ_WEIGHT_TITLE*(1f/(azPos+1)));
 			if(lfmBest==null || tmpWeight>lfmWeight) {
 				lfmBest=lfmResults.get(i);
 				lfmWeight=tmpWeight;
 			}
 
 		}
+		
+		Song lyricsBest=null;
+		float lyricsWeight=0;
+		if(lyricsResult!=null) {
+			lyricsBest=lyricsResult;
+			lyricsWeight=LYRICS_WEIGHT;
+			int azPos=azResults.indexOf(lyricsBest);
+			lyricsWeight=azPos<0?lyricsWeight:lyricsWeight+(AZ_WEIGHT_TITLE*(1f/(azPos+1)));
+			int lfmPos=lfmResults.indexOf(lyricsBest);
+			lyricsWeight=(lfmPos<0)?lyricsWeight:(lyricsWeight+(LASTFM_WEIGHT*(1f/(lfmPos+1))));
+		}
 
-		
 		if(azWeight==0 && lfmWeight==0)
-			return null;
+			return lyricsBest;
 		
-		if(azWeight>=lfmWeight)
-			return azBest;
-		else
+		if(lfmWeight>=azWeight && lfmWeight>=lyricsWeight)
 			return lfmBest;
+		else if(lyricsWeight>=azWeight && lyricsWeight>=lfmWeight)
+			return lyricsBest;
+		else {
+			return azBest;
+		}
 	}
 
 	public static String findOnYoutube(String keyword) {

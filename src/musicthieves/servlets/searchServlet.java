@@ -1,6 +1,7 @@
 package musicthieves.servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,11 +38,17 @@ public class searchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String input = request.getParameter("searchInput");
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String input = URLDecoder.decode(request.getParameter("searchInput"),"UTF-8");
 		int option = Integer.parseInt(request.getParameter("option"));
 		if(input!=null && input.trim()!="") {
 			if(option == 0) {
 				Song song = Mediator.searchByTitle(input);
+				if(song==null) {
+					response.getWriter().append("<h2 class=\"animated fadeInUp\">No match found</h2>");
+					return;
+				}
 				String videoID=Mediator.findOnYoutube(song.getTitle());
 				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
 				response.getWriter().append(
@@ -87,11 +94,15 @@ public class searchServlet extends HttpServlet {
 
 			}else if (option == 1) {
 				List<String> songs = Mediator.searchByArtist(input);
+				if(songs.size()==0) {
+					response.getWriter().append("<h2 class=\"animated fadeInUp\">No match found</h2>");
+					return;
+				}
 				response.getWriter().append(
 						"<div class=\"row\">\r\n" + 
 							"<div class=\"col-sm-6 col-sm-offset-3\"> " +
 								"<h2 style=\"color: #DAA520;\">Some songs of the searched artist</h2></br>");
-				for(int i = 0; i < 5; i++) {
+				for(int i = 0; i < 5 && i<songs.size(); i++) {
 					response.getWriter().append(
 							"<span style=\"cursor: pointer\" onClick=\"autoSearch('"+songs.get(i).replace("'", " ")+"')\">"+
 									songs.get(i) +
@@ -103,6 +114,10 @@ public class searchServlet extends HttpServlet {
 						"</div>\r\n"); 
 			}else if (option == 2) {
 				Song song = Mediator.searchByLyric(input);
+				if(song==null) {
+					response.getWriter().append("<h2 class=\"animated fadeInUp\">No match found</h2>");
+					return;
+				}
 				String videoID=Mediator.findOnYoutube(song.getTitle());
 				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
 				response.getWriter().append("<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 

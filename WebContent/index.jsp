@@ -177,7 +177,7 @@
 			<span style="float: right;">
 				Developed by 
 				<a href="http://www.facebook.com/gianmarco.russo.750">Gianmarco Russo</a> 
-				& 
+				&amp;
 				<a href="https://www.facebook.com/vincenzomario.conte">Vincenzo Conte</a>
 			</span>
 		</div>
@@ -201,7 +201,7 @@
 		$("#loader").css("display", "inline-block");
 		$.post("/MusicThieves/searchServlet",
 			   {
-					searchInput:  document.querySelector('#input').value,
+					searchInput:  encodeURI(document.querySelector('#input').value),
 					option: document.querySelector('input[name="option"]:checked').value
 			    },
 			    function(data, status){
@@ -216,7 +216,7 @@
 		$("#loader").css("display", "inline-block");
 		$.post("/MusicThieves/searchServlet",
 			   {
-					searchInput:  song,
+					searchInput:  encodeURI(song),
 					option: "0"
 			    },
 			    function(data, status){
@@ -231,7 +231,7 @@
 		$("#loader").css("display", "inline-block");
 		$.post("/MusicThieves/searchServlet",
 			   {
-					searchInput:  artist,
+					searchInput:  encodeURI(artist),
 					option: "1"
 			    },
 			    function(data, status){
