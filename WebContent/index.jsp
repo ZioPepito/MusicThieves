@@ -69,8 +69,7 @@
 				<div class="fronttext">
 					<h2 id="MusicThieves" class="animated fadeInUp">Music Thieves</h2>
 					<br />
-					<h2 id="subtitle" class=" animated fadeInUp">We steal nothing
-						, we borrow data !</h2>
+					<h2 id="subtitle" class=" animated fadeInUp">We steal nothing, we borrow data!</h2>
 				</div>
 			</div>
 		</div>
@@ -133,8 +132,6 @@
 							you like it but you don't know the title or the singer? Just
 							focus on remembering some words and search them, Music Thieves
 							will find it for you.</p>
-						<blockquote>BEH!</blockquote>
-						cit. Luca
 					</div>
 				</div>
 			</div>
