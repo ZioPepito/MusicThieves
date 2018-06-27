@@ -144,7 +144,7 @@
 		<!-- blockblack -->
 		<div class="blockblack" id="blockblack2">
 			<!-- Contact Starts -->
-			<div id="contact" class="contactform center">
+			<div id="contacts" class="contactform center">
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3">
 						<h3>
