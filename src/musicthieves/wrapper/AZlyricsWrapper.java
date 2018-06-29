@@ -38,8 +38,12 @@ public class AZlyricsWrapper {
 				if(counter>=MAX_RESULTS)
 					break; 
 				if(element.getElementsByClass("glyphicon-chevron-right").size()==0) {
-					String text=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get().getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
-					results.add(new Song(element.getElementsByTag("b").first().html(), element.getElementsByTag("b").get(1).html(), text));
+					doc=Jsoup.connect(element.getElementsByTag("a").first().attr("href")).get();
+					String text=doc.getElementsByClass("ringtone").first().parent().children().get(7).wholeText();
+					Song song=new Song(element.getElementsByTag("b").first().html(), element.getElementsByTag("b").get(1).html(), text);
+					String album=(doc.getElementsByClass("songlist-panel").first().getElementsByTag("b").first().text().replace("\"", ""));
+					song.setAlbum(album);
+					results.add(song);
 					counter++;
 				}
 			}
