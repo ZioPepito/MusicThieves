@@ -82,7 +82,8 @@ public class searchServlet extends HttpServlet {
 						"</div>\r\n" + 
 						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
 						"<div class=\"col-md-5 resultDiv\"> "+
-							"<h2>Audio</h2></br>" +
+							"<h2>Audio(Work in progress)</h2></br>" +
+							"<img src=\"assets/images/spotify.png\" style=\"width:200px;height:200px\"/>"+
 						" </div>\r\n" + 
 						"<div class=\"col-md-5 resultDiv\">" +
 							"<h2>Video</h2></br>" +
@@ -151,6 +152,7 @@ public class searchServlet extends HttpServlet {
 						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
 						"<div class=\"col-md-5 resultDiv\"> "+
 							"<h2>Audio</h2></br>" +
+							"<img src=\"assets/images/spotify.png\" style=\"width:200px;height:200px\"/>"+
 						" </div>\r\n" + 
 						"<div class=\"col-md-5 resultDiv\">" +
 							"<h2>Video</h2></br>" +
