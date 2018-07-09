@@ -149,8 +149,10 @@ public class Mediator {
 		
 		if(lfmWeight>=azWeight && lfmWeight>=lyricsWeight) {
 			azResults=az.searchByKey(lfmBest.getTitle()+" "+lfmBest.getArtist());
-			if(azResults.size()>0)
+			if(azResults.size()>0) {
 				lfmBest.setLyric(azResults.get(0).getLyric());
+				lfmBest.setAlbum(azResults.get(0).getAlbum());
+			}
 			return lfmBest;
 		}
 		else if(lyricsWeight>=azWeight && lyricsWeight>=lfmWeight)

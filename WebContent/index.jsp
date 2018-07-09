@@ -128,7 +128,7 @@
 							data from different sources to let you find every song and all
 							information about them. You can search your favourite songs or
 							artist using the options "in songs" or "in artists", but let us
-							explain the "un lyrics" option: you hear a song on the radio and
+							explain the "in lyrics" option: you hear a song on the radio and
 							you like it but you don't know the title or the singer? Just
 							focus on remembering some words and search them, Music Thieves
 							will find it for you.</p>
