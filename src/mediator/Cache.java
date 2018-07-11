@@ -34,11 +34,15 @@ public class Cache {
 	}
 	
 	public Song findSong(String input) {
-		return searchedSong.get(input.toLowerCase());
+		Song song = searchedSong.get(input.toLowerCase());
+		song.setTimestamp(System.currentTimeMillis());
+		return song;
 	}
 	
 	public List<String> findArtistsSongs(String input) {
-		return searchedArtistsSongs.get(input.toLowerCase());
+		List<String> songs = searchedArtistsSongs.get(input.toLowerCase());
+		songs.set(5, Long.toString(System.currentTimeMillis()));
+		return songs;
 	}
 	
 	class Task  extends TimerTask {
