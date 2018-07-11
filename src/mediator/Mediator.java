@@ -7,7 +7,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import musicthieves.wrapper.*;
 
 public class Mediator {
-
+	public static final Cache CACHE = new Cache();
 	public static final int AZ_WEIGHT=3, AZ_WEIGHT_TITLE=2, LASTFM_WEIGHT=2, LYRICS_WEIGHT=2; 
 
 	private static AZlyricsWrapper az= new AZlyricsWrapper();;
@@ -26,6 +26,10 @@ public class Mediator {
 
 
 	public static Song searchByLyric(String key) {
+		
+		Song song = CACHE.findSong(key);
+		if(song != null) return song;
+		
 		//AZLyrics
 		List<Song> azResults=az.searchByKey(key);
 		//lyrics
@@ -84,16 +88,28 @@ public class Mediator {
 		if(azWeight==0 && lfmWeight==0 && lyricsWeight==0)
 			return null;
 		
-		if(azWeight>=lfmWeight && azWeight>=lyricsWeight)
+		if(azWeight>=lfmWeight && azWeight>=lyricsWeight) {
+			azBest.setRelatedArtist(searchRelateArtist(azBest.getArtist()));
+			CACHE.storeSong(key, azBest);
 			return azBest;
-		else if(lfmWeight>=azWeight && lfmWeight>=lyricsWeight)
+		}
+		else if(lfmWeight>=azWeight && lfmWeight>=lyricsWeight) {
+			lfmBest.setRelatedArtist(searchRelateArtist(lfmBest.getArtist()));
+			CACHE.storeSong(key, lfmBest);
 			return lfmBest;
-		else
+		}
+		else {
+			lyricsBest.setRelatedArtist(searchRelateArtist(lyricsBest.getArtist()));
+			CACHE.storeSong(key, lyricsBest);
 			return lyricsBest;
-
+		}
 	}
 	
 	public static Song searchByTitle(String key) {
+		
+		Song song = CACHE.findSong(key);
+		if(song != null) return song;
+		
 		//AZLyrics
 		List<Song> azResults=az.searchByKey(key);
 		//lastfm
@@ -153,11 +169,19 @@ public class Mediator {
 				lfmBest.setLyric(azResults.get(0).getLyric());
 				lfmBest.setAlbum(azResults.get(0).getAlbum());
 			}
+			
+			lfmBest.setRelatedArtist(searchRelateArtist(lfmBest.getArtist()));
+			CACHE.storeSong(key, lfmBest);
 			return lfmBest;
 		}
-		else if(lyricsWeight>=azWeight && lyricsWeight>=lfmWeight)
+		else if(lyricsWeight>=azWeight && lyricsWeight>=lfmWeight) {
+			lyricsBest.setRelatedArtist(searchRelateArtist(lyricsBest.getArtist()));
+			CACHE.storeSong(key, lyricsBest);
 			return lyricsBest;
+		}
 		else {
+			azBest.setRelatedArtist(searchRelateArtist(azBest.getArtist()));
+			CACHE.storeSong(key, azBest);
 			return azBest;
 		}
 	}
@@ -168,7 +192,12 @@ public class Mediator {
 	}
 	
 	public static List<String> searchByArtist(String key) {
+		
+		List<String> artistsSongs = CACHE.findArtistsSongs(key);
+		if(artistsSongs != null) return artistsSongs;
+		
 		List<String> songs = ly.searchArtist(key);
+		CACHE.storeArtistsSong(key, songs);
 		return songs;
 	}
 	

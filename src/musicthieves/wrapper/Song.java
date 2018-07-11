@@ -1,10 +1,45 @@
 package musicthieves.wrapper;
 
+import java.util.List;
+
 public class Song {
 
 	private String title, artist, album, albumYear, lyric;
-	
+	private List<String> relatedArtist;
+	private long timestamp;
+
 	public Song() {
+		
+	}
+	
+	/**
+	 * @return the timestamp
+	 */
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	
+	/**
+	 * @return the relatedArtist
+	 */
+	public List<String> getRelatedArtist() {
+		return relatedArtist;
+	}
+
+
+	/**
+	 * @param relatedArtist the relatedArtist to set
+	 */
+	public void setRelatedArtist(List<String> relatedArtist) {
+		this.relatedArtist = relatedArtist;
 	}
 
 

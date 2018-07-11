@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -69,7 +70,7 @@ public class LyricsWrapper {
 			return null;
 		}
 		int offset = results.size()/2 - 2;
-		List<String> songs = new ArrayList<>();
+		List<String> songs = new Vector<String>();
 		if(results.size()>0) {
 			for(int i = offset; i <= offset+5; i++) {
 				songs.add(results.get(i).getElementsByTag("strong").first().text());

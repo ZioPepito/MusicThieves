@@ -50,7 +50,7 @@ public class searchServlet extends HttpServlet {
 					return;
 				}
 				String videoID=Mediator.findOnYoutube(song.getTitle());
-				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
+				List<String> relatedArtists = song.getRelatedArtist();
 				response.getWriter().append(
 						"<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
 						"<div class=\"col-md-5 resultDiv\">"+
@@ -120,7 +120,7 @@ public class searchServlet extends HttpServlet {
 					return;
 				}
 				String videoID=Mediator.findOnYoutube(song.getTitle());
-				List<String> relatedArtists = Mediator.searchRelateArtist(song.getArtist());
+				List<String> relatedArtists = song.getRelatedArtist();
 				response.getWriter().append("<div class=\"row col-lg-12 col-lg-offset-1\">\r\n" + 
 						"<div class=\"col-md-5 resultDiv\">"+
 							"<h2>Song info</h2></br>" +
